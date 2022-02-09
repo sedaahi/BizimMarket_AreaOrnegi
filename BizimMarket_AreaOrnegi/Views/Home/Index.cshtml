@@ -1,0 +1,42 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h4>Kategoriler</h4>
+
+        <div class="list-group">
+            <a asp-action="Index" class="list-group-item list-group-item-action @Active(null) ">Tüm Ürünler</a> @*Tüm ürünleri listelemek için*@
+
+            @foreach (var item in Model.Kategoriler)
+            {
+                <a class="list-group-item list-group-item-action @Active(item.Id)" asp-route-kategoriId="@item.Id">@item.Ad</a>
+
+                @*item.Id sayesinde kategoriye tıklandığında örn: https://localhost:44397/?kategoriId=1 yazması sağladık*@
+            }
+        </div>
+
+    </div>
+    <div class="col-md-9">
+        <h4 class="mt-3">Ürünler</h4>
+        <div class="row">
+            @foreach (var item in Model.Urunler)
+            {
+                <div class="col-6 col-md-4">
+                    <img class="w-100" src="~/img/urunler/@item.ResimYolu" />   @*Resimleri Görüntülemek için!!!!*@
+                    <h6>@item.Ad</h6>
+                    <p>₺@item.Fiyat.ToString("n2")</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@{
+    string Active(int?  kategoriId)
+    {
+        return kategoriId == Model.KategoriId ? "active" : "";
+    }
+}
