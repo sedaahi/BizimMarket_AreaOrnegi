@@ -14,7 +14,6 @@ namespace BizimMarket_AreaOrnegi.Models
         public decimal Fiyat { get; set; }
         public string ResimYolu { get; set; }
 
-
         public int KategoriId { get; set; }
         public Kategori Kategori { get; set; }
     }
